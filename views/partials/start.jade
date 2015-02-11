@@ -1,0 +1,9 @@
+#main-container
+  input(ng-if="state == 'join'", ng-model="user.room", placeholder='Enter the room id')
+  input(ng-model="user.name", placeholder='Enter your name')
+  #button-container
+    button(ng-click='create()')
+      | Join
+    | &#x9;&#x9;&#x9;&#x9;
+    button(ng-click='menu()')
+      | Back

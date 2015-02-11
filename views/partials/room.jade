@@ -1,0 +1,12 @@
+#main-container
+  {{room.id}}
+  ol
+    li(ng-repeat="people in room.people")
+      | {{people.name}} 
+
+  #button-container
+    button(ng-click='start()')
+      | Start
+    | &#x9;&#x9;&#x9;&#x9;
+    button(ng-click='main()')
+      | Leave

@@ -1,0 +1,6 @@
+#main-container
+  {{win}},
+  {{sequence}}
+  #button-container
+    button(ng-repeat="n in sequence",ng-click='signal($index + 1)')
+      | {{$index + 1}}

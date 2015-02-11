@@ -1,0 +1,49 @@
+extends layout
+
+block body
+
+  #main(ng-controller='AppCtrl')
+    #main-content
+        #main-menu
+          h4
+            | P R I S O N E R
+          hr
+          //- div(ng-view)
+
+          div(ng-switch='state')
+            div(ng-switch-when='menu')
+              div(data-ng-include data-src="'partials/menu.jade'")
+            div(ng-switch-when='new')
+              div(data-ng-include data-src="'partials/start.jade'")
+            div(ng-switch-when='join')
+              div(data-ng-include data-src="'partials/start.jade'")
+            div(ng-switch-when='room')
+              div(data-ng-include data-src="'partials/room.jade'")
+            div(ng-switch-when='master')
+              div(data-ng-include data-src="'partials/master.jade'")
+            div(ng-switch-when='slave')
+              div(data-ng-include data-src="'partials/slave.jade'")
+            div(ng-switch-when='end')
+              div(data-ng-include data-src="'partials/end.jade'")
+
+          //- div(data-ng-include data-src="'partials/'+state+'.jade'")
+        #footer
+          hr
+          a(href='http://jackymok.ca') Prisoner
+          |  designed by Jacky, inspired by 
+          a(href='pebble.com') Pebble
+          br
+          |  
+          a(href='https://github.com/alstroemeria/varistor') https://github.com/alstroemeria/varistor
+
+
+  script(src='/socket.io/socket.io.js')
+  script(src='components/angular/angular.js')
+  script(src='components/angular-route/angular-route.js')
+  script(src='components/angular-socket-io/socket.js')
+  script(src='components/annyang/annyang.js')
+  script(src='js/app.js')
+  script(src='js/services.js')
+  script(src='js/controllers.js')
+  script(src='js/filters.js')
+  script(src='js/directives.js')
