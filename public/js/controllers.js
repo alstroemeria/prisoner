@@ -42,7 +42,7 @@ angular.module('myApp.controllers', []).
     });
 
     socket.on('game:slave', function (data){
-      $scope.state="slave";
+      $scope.state = "slave";
       $scope.command = false;
     });
 
@@ -74,9 +74,9 @@ angular.module('myApp.controllers', []).
 
     socket.on('game:end', function (message){
 
-      // if (annyang) {
-      //   annyang.abort();
-      // }
+      if (annyang) {
+        annyang.abort();
+      }
 
       $scope.state = 'end';
       $scope.message = message;
