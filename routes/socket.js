@@ -51,7 +51,16 @@ var rooms = (function () {
     }
   };
 
-  var start = function (room_id) {
+  var start = function (room_id, socket_id) {
+    for (var i = 0; i < rooms[room_id].people.length; i++) {
+      if (rooms[room_id].people[i].socket_id == socket_id){
+        var tmp = rooms[room_id].people[0];
+        rooms[room_id].people[0] = rooms[room_id].people[i];
+        rooms[room_id].people[i] = tmp;
+        break;
+      }
+    }
+
     rooms[room_id].current = 0;
     rooms[room_id].permutation = permutation(rooms[room_id].people.length);
     return rooms[room_id].permutation;
@@ -120,7 +129,7 @@ module.exports = function (io) {
     });
 
     socket.on('room:start', function () {
-      socket.emit('game:master', rooms.start(room_id));
+      socket.emit('game:master', rooms.start(room_id, socket.id));
       socket.broadcast.in(room_id).emit('game:slave');
     });
 
