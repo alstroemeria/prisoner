@@ -46,9 +46,13 @@ var rooms = (function () {
   };
 
   var join = function (room_id, name, socket_id) {
-    if (rooms[room_id].current < 0 ){
-      rooms[room_id].people.push({name: name, socket_id: socket_id});
+    if (room_id in rooms){
+      if (rooms[room_id].current < 0 ){
+        rooms[room_id].people.push({name: name, socket_id: socket_id});
+        return true;
+      }
     }
+    return false;
   };
 
   var start = function (room_id, socket_id) {
@@ -94,9 +98,9 @@ var rooms = (function () {
     }
   };
 
-  var free = function (room) {
-    if (rooms[room]) {
-      delete rooms[room];
+  var free = function (room_id) {
+    if (rooms[room_id]) {
+      delete rooms[room_id];
     }
   };
 
@@ -121,11 +125,12 @@ module.exports = function (io) {
     socket.on('create', function (data) {
       name = data.name;
       room_id = data.room || rooms.create();
-      rooms.join(room_id, name, socket.id);
-      socket.join(room_id);
-      io.sockets.in(room_id).emit('room:update', {
-        room: rooms.get(room_id)
-      });
+      if (rooms.join(room_id, name, socket.id)){
+        socket.join(room_id);
+        io.sockets.in(room_id).emit('room:update', {
+          room: rooms.get(room_id)
+        });
+      }
     });
 
     socket.on('room:start', function () {
@@ -140,8 +145,9 @@ module.exports = function (io) {
     socket.on('game:activate', function () {
       var result = rooms.activate(room_id, socket.id);
       if (result <= 0 ){
-        io.sockets.in(room_id).emit('game:end', (result == 0)? 'escaped':'death');
+        io.sockets.in(room_id).emit('game:end', (result == 0)? 'Free them!':'Trapped Forever!');
       } 
+      rooms.free(room_id);
     });
 
   });

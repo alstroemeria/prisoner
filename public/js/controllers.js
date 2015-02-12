@@ -5,7 +5,6 @@
 angular.module('myApp.controllers', []).
   controller('AppCtrl', function ($scope, socket) {
     $scope.create = function(){
-      console.log($scope.user);
       socket.emit("create", $scope.user);
     };
 
@@ -42,12 +41,12 @@ angular.module('myApp.controllers', []).
     });
 
     socket.on('game:slave', function (data){
-      $scope.state = "slave";
+      $scope.state = 'slave';
       $scope.command = false;
     });
 
     socket.on('game:master', function (sequence){
-      $scope.state="master";
+      $scope.state= 'master';
       $scope.sequence = sequence;
 
       if (annyang) {
@@ -74,7 +73,7 @@ angular.module('myApp.controllers', []).
 
     socket.on('game:end', function (message){
 
-      if (annyang) {
+      if (annyang && $scope.state=='master') {
         annyang.abort();
       }
 

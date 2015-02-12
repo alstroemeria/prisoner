@@ -4,7 +4,6 @@
     color: rgb(34, 34, 34);
     max-width: 960px;
     text-align: center;
-    font: Raleway, HelveticaNeue, 'Helvetica Neue', Helvetica;
     margin: 0px 160px;
 }/*#DIV_1*/
 
@@ -13,6 +12,8 @@
     max-width: 500px;
     width: 500px;
     margin: 240px 230px 0px;
+    font: normal normal 300 normal 14px/15px Helvetica;
+
 }
 
 #main-menu {
@@ -26,7 +27,6 @@
 }
 
 #button-container {
-    height: 48px;
     text-align: center;
     width: 500px;
     margin: 10px 0px 0px;
@@ -45,6 +45,8 @@
 h4 {
     font: normal normal 300 normal 30px/40.5px Helvetica;
 }
+
+
 
 hr {
     width: 500px;
@@ -71,6 +73,19 @@ button {
     outline: rgb(85, 85, 85) none 0px;
     padding: 0px 30px;
 }
+
+li {
+  text-align: center;
+  position: relative;
+  margin: 0 36px 6px 0;
+  padding: 4px 8px;
+  list-style: none;
+  background: transparent;
+  background-color: #f9f9f9;
+}
+
+
+
 
 input {
     height: 48px;

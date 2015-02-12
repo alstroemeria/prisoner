@@ -1,6 +1,7 @@
 #main-container
-  {{win}},
-  {{sequence}}
+  Escape: {{sequence}}
   #button-container
-    button(ng-repeat="n in sequence",ng-click='signal($index + 1)')
-      | {{$index + 1}}
+    div(ng-repeat="n in sequence")
+      button(ng-click='signal($index + 1)')
+        | {{$index + 1}}
+      | &#x9;&#x9;&#x9;&#x9;
