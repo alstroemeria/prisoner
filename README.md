@@ -6,16 +6,19 @@ There are an additional rooms numbered 1 to 4, each with a person sitting at a c
 
 If the buttons are pressed in the wrong order, they will be trapped forever. 
 
-**twist: variable number of rooms, and mutiple games**
+**twist: variable number of rooms, and mutiple games** 
 
-
-## Task
-
-1. Create the webapp that is able to listen to the first person's computer’s microphone and push commands to the server.
-2. Build the Node.js server that will receive commands from all the clients and console.log the order in which buttons are pressed as well as the phrase “Free them!” once all buttons have been pressed in the correct order.
-3. Create the webapp that will tell the people in the remaining rooms when to hit the button.
-4. Explain how you would scale the situation out to multiple groups of rooms all with different orders that the buttons need to be pressed.
-5. Use websockets 
+## How to play
+1. Create a room
+2. Read the access key of that room.
+3. Share the access key with your friends
+4. Friends join an existing room through a access key.
+5. In the lobby, you can see all other players
+6. The person who starts the game is the master. He will issue voice commands
+7. The 'slaves' are given a button, they can trigger at any time.
+8. The master will call out the combination.
+9. The slaves will ideally attempt to trigger the button on their turn
+10. If the players are able to complete the combination they win.
 
 ## Extras
 1. Muliple games. Join via game key.
@@ -34,5 +37,9 @@ npm install
 ```shell
 node app.js
 ```
+
+## Scale
+Since game rooms were implemented we already have the ability to handle mutliple groups of users we can immediately scale to a arbitrary amount of games and users. Individual games also have the capacity to hold any amount of players and rooms. The only limitation is the rooms object in memory. To solve this we could use a database like redis to hold these value in memory. Socket.io is commonly used with redis in this way. It can also weight balance by adding more nodes.
+
 
 
